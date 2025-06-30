@@ -1,0 +1,45 @@
+
+/ {
+	aliases {
+		led3 = &red_led;
+	};
+};
+
+/* FLEXIO Disabled for now */
+&pinctrl {
+	pinmux_flexio0spi1: pinmux_flexio0spi1 {
+		group0 {
+			pinmux = // cs is on GPIO P4_5 for FLEX SPI
+			<FLEXIO0_D12_P4_4>, /* sdi */
+			<FLEXIO0_D14_P4_6>, /* sdo */
+			<FLEXIO0_D15_P4_7>; /* sck */
+			drive-strength = "low";
+			slew-rate = "slow";
+		};
+	};
+};
+
+&flexio0 {
+	status = "okay";
+	my_spi_master: flexio0spi1 {
+		compatible = "nxp,flexio-spi";
+		status = "okay";
+		clock-frequency = <2000000>;
+		#address-cells = <1>;
+		#size-cells = <0>;
+		cs-gpios = <&gpio4 5 GPIO_ACTIVE_LOW>;
+		sdo-pin = <14>;
+		sdi-pin = <12>;
+		sck-pin = <15>;
+		pinctrl-0 = <&pinmux_flexio0spi1>;
+		pinctrl-names = "default";
+		spi0_cs0_flash: test_spi@0 {
+			compatible = "vdn,spi";
+			reg = <0>;
+			cs-gpios = <&gpio4 5 GPIO_ACTIVE_LOW>;
+			spi-max-frequency = <4000000>;
+			status = "okay";
+
+		};
+	};
+};

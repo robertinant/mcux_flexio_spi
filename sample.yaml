@@ -1,0 +1,9 @@
+sample:
+  name: FLEXIO SPI Example
+tests:
+  sample.spi.flexio:
+    tags: FLEXIO SPI
+    depends_on: spi
+    harness: spi
+    integration_platforms:
+      - frdm_mcxa156
