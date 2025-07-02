@@ -13,6 +13,7 @@
 			<FLEXIO0_D12_P4_4>, /* sdi */
 			<FLEXIO0_D14_P4_6>, /* sdo */
 			<FLEXIO0_D15_P4_7>; /* sck */
+			input-enable;
 			drive-strength = "low";
 			slew-rate = "slow";
 		};
